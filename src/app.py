@@ -16,7 +16,7 @@ def get_pandas_data(xlsx_filename: str, xlsx_sheet: str ) -> pd.DataFrame:
    using relative paths. Relative paths are necessary for
    data loading to work in Render.
    '''
-   PATH = pathlib.Path('src').parent
+   PATH = pathlib.Path(__file__).parent
    DATA_PATH = PATH.joinpath("data").resolve()
    return pd.read_excel(DATA_PATH.joinpath(xlsx_filename),sheet_name=xlsx_sheet)
 
