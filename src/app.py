@@ -9,7 +9,7 @@ import datetime as dt
 import pathlib
 
 bollette = ['BUPA_2022','Cagliari_3piano', 'Cagliari_5piano', 'Villasimius_Serre_Morus']
-
+consumi1 = get_pandas_data("Bollette.xlsx", bollette)
 def get_pandas_data(xlsx_filename: str, xlsx_sheet: str ) -> pd.DataFrame:
    '''
    Load data from /data directory as a pandas DataFrame
@@ -60,7 +60,7 @@ app.layout = html.Div([
 )
 def mappa(bollette):
     mesi = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre']
-    consumi = get_pandas_data("Bollette.xlsx", bollette)
+    consumi = consumi1
     fig2 = go.Figure(
             data=[
             go.Bar(name='F1', x=mesi, y=consumi['F1'], hovertemplate= "consumo: %{y}"),
