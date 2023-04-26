@@ -9,7 +9,7 @@ import datetime as dt
 import pathlib
 
 bollette = ['BUPA_2022','Cagliari_3piano', 'Cagliari_5piano', 'Villasimius_Serre_Morus']
-consumi1 = get_pandas_data("Bollette.xlsx", bollette)
+
 def get_pandas_data(xlsx_filename: str, xlsx_sheet: str ) -> pd.DataFrame:
    '''
    Load data from /data directory as a pandas DataFrame
@@ -19,7 +19,7 @@ def get_pandas_data(xlsx_filename: str, xlsx_sheet: str ) -> pd.DataFrame:
    PATH = pathlib.Path(__file__).parent
    DATA_PATH = PATH.joinpath("data").resolve()
    return pd.read_excel(DATA_PATH.joinpath(xlsx_filename),sheet_name=xlsx_sheet)
-
+consumi1 = get_pandas_data("Bollette.xlsx", bollette)
 #creiamo un applicazione web con stile bootstrap
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP], meta_tags=[{'name': 'viewport','content': 'width=device-width, initial-scale=1.0'}])
 
