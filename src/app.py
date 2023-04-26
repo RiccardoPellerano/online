@@ -13,18 +13,22 @@ import pathlib
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP], meta_tags=[{'name': 'viewport','content': 'width=device-width, initial-scale=1.0'}])
 
 server = app.server
-bollette = ['BUPA_2022','Cagliari_3piano', 'Cagliari_5piano', 'Villasimius_Serre_Morus']
+bollette = ['BUPA-2022.csv','BUPA-2021.csv','BUPA-2020.csv']
 
-def get_pandas_data(xlsx_filename: str, xlsx_sheet: str ) -> pd.DataFrame:
+import pandas as pd
+import pathlib
+
+def get_pandas_data(csv_filename: str) -> pd.DataFrame:
    '''
    Load data from /data directory as a pandas DataFrame
    using relative paths. Relative paths are necessary for
-   data loading to work in Render.
+   data loading to work in Heroku.
    '''
    PATH = pathlib.Path('src').parent
    DATA_PATH = PATH.joinpath("data").resolve()
-   return pd.read_excel(DATA_PATH.joinpath(xlsx_filename),sheet_name=xlsx_sheet)
-consumi1 = get_pandas_data("Bollette.xlsx", bollette)
+   return pd.read_csv(DATA_PATH.joinpath(csv_filename), sep =';')
+
+
 
 app.layout = html.Div([
     dbc.Container([
@@ -39,7 +43,7 @@ app.layout = html.Div([
         dbc.Row([ 
             dbc.Col([  
                 html.H4("Seleziona l'abitazione",style={'color':'white','font-family':'--tds-font-family--combined','font-weight': '--tds-heading--font-weight'}),
-                dcc.Dropdown(options = [{'label': i, 'value': i} for i in bollette],value='BUPA_2022', id = 'bollette', style ={'width' :'400px','font-family':'--tds-font-family--combined','font-weight': '--tds-heading--font-weight'}),
+                dcc.Dropdown(options = [{'label': i, 'value': i} for i in bollette],value='BUPA-2022.csv', id = 'bollette', style ={'width' :'400px','font-family':'--tds-font-family--combined','font-weight': '--tds-heading--font-weight'}),
             ])
         ]),
         dbc.Row([ 
@@ -60,7 +64,7 @@ app.layout = html.Div([
 )
 def mappa(bollette):
     mesi = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre']
-    consumi = consumi1
+    consumi =  get_pandas_data(bollette)
     fig2 = go.Figure(
             data=[
             go.Bar(name='F1', x=mesi, y=consumi['F1'], hovertemplate= "consumo: %{y}"),
