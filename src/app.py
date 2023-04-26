@@ -8,6 +8,11 @@ import os
 import datetime as dt
 import pathlib
 
+
+#creiamo un applicazione web con stile bootstrap
+app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP], meta_tags=[{'name': 'viewport','content': 'width=device-width, initial-scale=1.0'}])
+
+server = app.server
 bollette = ['BUPA_2022','Cagliari_3piano', 'Cagliari_5piano', 'Villasimius_Serre_Morus']
 
 def get_pandas_data(xlsx_filename: str, xlsx_sheet: str ) -> pd.DataFrame:
@@ -20,11 +25,6 @@ def get_pandas_data(xlsx_filename: str, xlsx_sheet: str ) -> pd.DataFrame:
    DATA_PATH = PATH.joinpath("data").resolve()
    return pd.read_excel(DATA_PATH.joinpath(xlsx_filename),sheet_name=xlsx_sheet)
 consumi1 = get_pandas_data("Bollette.xlsx", bollette)
-#creiamo un applicazione web con stile bootstrap
-app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP], meta_tags=[{'name': 'viewport','content': 'width=device-width, initial-scale=1.0'}])
-
-server = app.server
-
 
 app.layout = html.Div([
     dbc.Container([
