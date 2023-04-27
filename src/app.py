@@ -4,7 +4,6 @@ from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 import plotly.graph_objects as go
 import pandas as pd
-import os
 import datetime as dt
 import pathlib
 
@@ -13,6 +12,7 @@ import pathlib
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP], meta_tags=[{'name': 'viewport','content': 'width=device-width, initial-scale=1.0'}])
 
 server = app.server
+print('prova daje ')
 bollette = ['BUPA-2022.csv','BUPA-2021.csv','BUPA-2020.csv']
 
 import pandas as pd
