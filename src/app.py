@@ -21,7 +21,7 @@ def get_pandas_data(csv_filename: str) -> pd.DataFrame:
    using relative paths. Relative paths are necessary for
    data loading to work in Heroku.
    '''
-   return pd.read_csv('/opt/render/project/src/src/data/'.joinpath(csv_filename), sep =';')
+   return pd.read_csv('/opt/render/project/data/'.joinpath(csv_filename), sep =';')
 
 print('dajeeeeee')
 
