@@ -12,11 +12,8 @@ import pathlib
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP], meta_tags=[{'name': 'viewport','content': 'width=device-width, initial-scale=1.0'}])
 
 server = app.server
-print('prova daje ')
-bollette = ['BUPA-2022.csv','BUPA-2021.csv','BUPA-2020.csv']
 
-import pandas as pd
-import pathlib
+bollette = ['BUPA-2022.csv','BUPA-2021.csv','BUPA-2020.csv']
 
 def get_pandas_data(csv_filename: str) -> pd.DataFrame:
    '''
@@ -24,10 +21,11 @@ def get_pandas_data(csv_filename: str) -> pd.DataFrame:
    using relative paths. Relative paths are necessary for
    data loading to work in Heroku.
    '''
-   PATH = pathlib.Path(__file__).parent
+   PATH = pathlib.Path('src').parent
    DATA_PATH = PATH.joinpath("data").resolve()
    return pd.read_csv(DATA_PATH.joinpath(csv_filename), sep =';')
 
+print('dajeeeeee')
 
 
 app.layout = html.Div([
