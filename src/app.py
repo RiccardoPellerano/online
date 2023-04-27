@@ -6,6 +6,7 @@ import plotly.graph_objects as go
 import pandas as pd
 import datetime as dt
 import pathlib
+import os
 
 
 #creiamo un applicazione web con stile bootstrap
@@ -21,7 +22,10 @@ def get_pandas_data(csv_filename: str) -> pd.DataFrame:
    using relative paths. Relative paths are necessary for
    data loading to work in Heroku.
    '''
-   return pd.read_csv('/opt/render/project/data/'.joinpath(csv_filename), sep =';')
+   os.chdir('..')
+   PATH = pathlib.Path('/opt/render/project/src')
+   DATA_PATH = PATH.joinpath("data").resolve()
+   return pd.read_csv(DATA_PATH.joinpath(csv_filename), sep =';')
 
 print('dajeeeeee')
 
